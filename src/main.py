@@ -1,12 +1,13 @@
 #!/usr/bin/python3 
 import argparse
-import requests
 import os
 import configparser
 import sys
 import logging
 import time
 import pathlib
+
+import requests
 
 BASE_FOLDER = pathlib.Path(__file__).parent.absolute()
 BASE_URL = "http://api.telegram.org"
@@ -48,23 +49,23 @@ def send_message(chat_id: int, text: str, token: int, quiet: bool = False, messa
         messages_amount-=1
 
 
-def dialog(token: str, chat_id: int):
-    cur_id = -1
-    res = requests.get(f"{BASE_URL}/bot{token}/getUpdates", params={'offset': cur_id, 'allowed_updates': ['message']})
-    res_json = res.json()
-    print(res_json)
-    while True:
-        try:
-            if res_json['result']:
-                if 'text' in res_json['result'][0]['message']:
-                    print(res_json['result'][0]['message']['text'])
-                cur_id = res_json['result'][0]['update_id'] + 1
-            res = requests.get(f"{BASE_URL}/bot{token}/getUpdates", params={'offset': cur_id, 'allowed_updates': ['message']})
-            res_json = res.json()
-            time.sleep(0.2)
-        except (KeyboardInterrupt, EOFError):
-            print('\nBye!')
-            return 
+# def dialog(token: str, chat_id: int):
+#     cur_id = -1
+#     res = requests.get(f"{BASE_URL}/bot{token}/getUpdates", params={'offset': cur_id, 'allowed_updates': ['message']})
+#     res_json = res.json()
+#     print(res_json)
+#     while True:
+#         try:
+#             if res_json['result']:
+#                 if 'text' in res_json['result'][0]['message']:
+#                     print(res_json['result'][0]['message']['text'])
+#                 cur_id = res_json['result'][0]['update_id'] + 1
+#             res = requests.get(f"{BASE_URL}/bot{token}/getUpdates", params={'offset': cur_id, 'allowed_updates': ['message']})
+#             res_json = res.json()
+#             time.sleep(0.2)
+#         except (KeyboardInterrupt, EOFError):
+#             print('\nBye!')
+#             return 
 
 def main():
     parser = argparse.ArgumentParser(description='Send messages from your bot to user in TG via terminal command')
@@ -77,7 +78,7 @@ def main():
     parser.add_argument('--default_token', action="store", type=str, help='set telegram bot api token as default and exit')
     parser.add_argument('--preamble', action="store", type=str, help='set text that will be added before text, space for no preamle and exit')
     parser.add_argument('--show_configs', action="store_true", help='show current configuration and exit')
-    parser.add_argument('--dialog', action="store_true", help='listen for only text messages from particular chat and write them')
+    # parser.add_argument('--dialog', action="store_true", help='listen for only text messages from particular chat and write them')
     args = parser.parse_args()
     check_and_generate_config()
     config = configparser.ConfigParser()

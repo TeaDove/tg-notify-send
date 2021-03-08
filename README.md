@@ -28,7 +28,6 @@ optional arguments:
                         set telegram bot api token as default and exit
   --preamble PREAMBLE   set text that will be added before text, space for no preamle and exit
   --show_configs        show current configuration and exit
-  --dialog              listen for only text messages from particular chat and write them
 ```
 ## Instalation
 ### Install from source
@@ -45,3 +44,4 @@ pip install git+https://github.com/TeaDove/tg-notify-send
 - settings for parse_mode
 - badges
 - tests
+- dialogs(like in unix `write` or `nc`)
