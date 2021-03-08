@@ -73,9 +73,9 @@ def main():
     parser.add_argument('-n', '--number', action="store", type=int, help="send same message n times, WARNING, it's stricly recomended not to send more than 30 message in row because of telegram spam control")
     parser.add_argument('-c', '--chat_id', action="store", type=int, help='use chat id for sending a message')
     parser.add_argument('-t', '--token', action="store", type=str, help='use telegram bot api token')
-    parser.add_argument('--set_default_chat_id', action="store", type=str, help='set chat id for sending a message as default and exit')
-    parser.add_argument('--set_default_token', action="store", type=str, help='set telegram bot api token as default and exit')
-    parser.add_argument('--set_preamble', action="store", type=str, help='set text that will be added before text, space for no preamle and exit')
+    parser.add_argument('--default_chat_id', action="store", type=str, help='set chat id for sending a message as default and exit')
+    parser.add_argument('--default_token', action="store", type=str, help='set telegram bot api token as default and exit')
+    parser.add_argument('--preamble', action="store", type=str, help='set text that will be added before text, space for no preamle and exit')
     parser.add_argument('--show_configs', action="store_true", help='show current configuration and exit')
     parser.add_argument('--dialog', action="store_true", help='listen for only text messages from particular chat and write them')
     args = parser.parse_args()
@@ -87,17 +87,17 @@ def main():
     preamble = config['credentials']['preamble'] 
     messages_amount = 1 if args.number is None else args.number
     should_send_message = True
-    if args.set_default_chat_id:
+    if args.default_chat_id:
         config['credentials']['chat_id'] = args.set_default_chat_id
         rewrite_config(config)
         should_send_message = False
         print('Default chat id updated')
-    if args.set_default_token:
+    if args.default_token:
         config['credentials']['token'] = args.set_default_token
         rewrite_config(config)
         should_send_message = False
         print('Default token updated')
-    if args.set_preamble:
+    if args.preamble:
         config['credentials']['preamble'] = args.set_preamble if args.set_preamble else None 
         rewrite_config(config)
         should_send_message = False

@@ -1,15 +1,15 @@
-# tg_notify_send
+# tg-notify-send
 ## Telegram command line notifications sender.
-tg_notify_send allow you to send messages via telegram bot api.<br>
-i.e. you have launched time-consuming script and want to be notified after complition of this scripts. In terminal:<br>
-`<you-script>; tg_notify_send "Work completed!"`
+tg-notify-send allow you to send messages via telegram bot api.<br>
+i.e. you have launched time-consuming script and want to be notified after complition of this scripts. i.e. terminal:<br>
+`seq 99999999 | tqdm --bytes | wc -l && tg-notify-send "Work completed!"          "`
 ## Manual
 ```
-usage: tg_notify_send [-h] [-q] [-n NUMBER] [-c CHAT_ID] [-t TOKEN] [--set_default_chat_id SET_DEFAULT_CHAT_ID] [--set_default_token SET_DEFAULT_TOKEN] [--set_preamble SET_PREAMBLE]
-                      [--show_configs]
-                      [message [message ...]]
+usage: main.py [-h] [-q] [-n NUMBER] [-c CHAT_ID] [-t TOKEN] [--default_chat_id DEFAULT_CHAT_ID] [--default_token DEFAULT_TOKEN] [--preamble PREAMBLE] [--show_configs] [--dialog] [message [message ...]]
 
-positional arguments:<br>
+Send messages from your bot to user in TG via terminal command
+
+positional arguments:
   message               text of message, that you want to send
 
 optional arguments:
@@ -21,20 +21,24 @@ optional arguments:
                         use chat id for sending a message
   -t TOKEN, --token TOKEN
                         use telegram bot api token
-  --set_default_chat_id SET_DEFAULT_CHAT_ID
+  --default_chat_id DEFAULT_CHAT_ID
                         set chat id for sending a message as default and exit
-  --set_default_token SET_DEFAULT_TOKEN
+  --default_token DEFAULT_TOKEN
                         set telegram bot api token as default and exit
-  --set_preamble SET_PREAMBLE
-                        set text that will be added before text, space for no preamle and exit
-  --show_configs        show current configuration and exit.
+  --preamble PREAMBLE   set text that will be added before text, space for no preamle and exit
+  --show_configs        show current configuration and exit
+  --dialog              listen for only text messages from particular chat and write them
 ```
 ## Instalation
 ### Install from source
 ```
-git clone https://gitlab.com/TeaDove/tg_notify_send
-cd tg_notify_send
+git clone https://github.com/TeaDove/tg-notify-send
+cd tg-notify-send
 pip install .
+```
+or just
+```
+pip install git+https://github.com/TeaDove/tg-notify-send
 ```
 ## Todo
 - settings for parse_mode
